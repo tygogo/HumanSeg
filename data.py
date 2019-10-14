@@ -54,10 +54,10 @@ class ProtraitData(Dataset):
         img = cv2.resize(img, (target_w, target_h))
         mask = cv2.resize(mask, (target_w, target_h))
 
-
+        target_h, target_w, _ = img.shape
         # random crop to 224
-        start_y = random.randint(0, 300-224)
-        start_x = random.randint(0, 300-224)
+        start_y = random.randint(0, target_h-224)
+        start_x = random.randint(0, target_w-224)
         img = img[start_y: start_y+224, start_x:start_x+224]
         mask = mask[start_y: start_y+224, start_x:start_x+224]
 

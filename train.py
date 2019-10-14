@@ -27,7 +27,7 @@ def train(model, device, loader, opt, epochs):
 
             if(i+1)%10 == 0:
                 print("epoch:%d  %d/%d---%.6f"%(epoch, i*len(data), len(loader.dataset), loss.item()))
-                torch.save(model.state_dict(), 'C:/Users/gogo/Desktop/parameter.pkl')
+                torch.save(model.state_dict(), './parameter.pkl')
 
 
 model = AAA()
@@ -41,18 +41,18 @@ model = AAA()
 #my_dict.update(pretrained_dict)
 #model.load_state_dict(my_dict)
 
-model.load_state_dict(torch.load('C:/Users/gogo/Desktop/parameter.pkl', map_location=DEVICE))
+model.load_state_dict(torch.load('./parameter.pkl', map_location=DEVICE))
 
 model = model.float().to(DEVICE)
-dataset = ProtraitData(None)
+dataset = ProtraitData()
 
-loader = DataLoader(dataset,batch_size=10, shuffle=True)
+loader = DataLoader(dataset, batch_size=10, shuffle=True)
 criterion = nn.CrossEntropyLoss()
 opt = optim.Adam(model.parameters(),lr=0.0001)
 
 
 
-# train(model, DEVICE, loader, opt, EPOCH)
+train(model, DEVICE, loader, opt, EPOCH)
 
 
 
